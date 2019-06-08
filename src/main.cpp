@@ -31,6 +31,7 @@ void processing(char *file_name)
             mygraph.add_edge(ori, dest, weight);
         }
         mygraph.print_edges();
+        mygraph.print_degree_vertices();
     }
     fclose(pFile);
 }

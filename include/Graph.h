@@ -12,8 +12,9 @@ private:
         }
     };
     int V;
+    std::vector <int> degree_of_vertices;
     std::vector<std::vector<struct edge> > adj;
-protected:
+    bool calc_degree_vertices();
 
 public:
     Graph(int V);
@@ -21,5 +22,6 @@ public:
 
     bool add_edge(int ori, int dest, int weight);
     bool print_edges();
+    bool print_degree_vertices();
 
 };
