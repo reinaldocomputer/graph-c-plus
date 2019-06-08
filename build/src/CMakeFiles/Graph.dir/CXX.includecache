@@ -6,5 +6,11 @@
 
 #IncludeRegexTransform: 
 
+/home/reinaldo/Projects/graph-c-plus/include/Graph.h
+vector
+-
+
 /home/reinaldo/Projects/graph-c-plus/src/Graph.cpp
+../include/Graph.h
+/home/reinaldo/Projects/graph-c-plus/include/Graph.h
 

@@ -6,5 +6,5 @@ CXX_FLAGS =
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/reinaldo/Projects/graph-c-plus/src/. -I/home/reinaldo/Projects/graph-c-plus/src/Graph 
+CXX_INCLUDES = -I/home/reinaldo/Projects/graph-c-plus/src/. 
 

@@ -1,4 +1,3 @@
-int teste()
-{
-    return 5;
-}
+#pragma once
+#include "../include/Graph.h"
+
