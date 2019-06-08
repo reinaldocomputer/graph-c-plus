@@ -111,19 +111,6 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named Graph
-
-# Build rule for target.
-Graph: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 Graph
-.PHONY : Graph
-
-# fast build rule for target.
-Graph/fast:
-	$(MAKE) -f src/CMakeFiles/Graph.dir/build.make src/CMakeFiles/Graph.dir/build
-.PHONY : Graph/fast
-
-#=============================================================================
 # Target rules for targets named main
 
 # Build rule for target.
@@ -144,7 +131,6 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... Graph"
 	@echo "... main"
 .PHONY : help
 

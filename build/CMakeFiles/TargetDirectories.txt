@@ -1,8 +1,5 @@
 /home/reinaldo/Projects/graph-c-plus/build/CMakeFiles/edit_cache.dir
 /home/reinaldo/Projects/graph-c-plus/build/CMakeFiles/rebuild_cache.dir
-/home/reinaldo/Projects/graph-c-plus/build/include/CMakeFiles/edit_cache.dir
-/home/reinaldo/Projects/graph-c-plus/build/include/CMakeFiles/rebuild_cache.dir
 /home/reinaldo/Projects/graph-c-plus/build/src/CMakeFiles/rebuild_cache.dir
-/home/reinaldo/Projects/graph-c-plus/build/src/CMakeFiles/Graph.dir
 /home/reinaldo/Projects/graph-c-plus/build/src/CMakeFiles/edit_cache.dir
 /home/reinaldo/Projects/graph-c-plus/build/src/CMakeFiles/main.dir

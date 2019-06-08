@@ -111,21 +111,6 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-src/CMakeFiles/Graph.dir/rule:
-	cd /home/reinaldo/Projects/graph-c-plus/build && $(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/Graph.dir/rule
-.PHONY : src/CMakeFiles/Graph.dir/rule
-
-# Convenience name for target.
-Graph: src/CMakeFiles/Graph.dir/rule
-
-.PHONY : Graph
-
-# fast build rule for target.
-Graph/fast:
-	cd /home/reinaldo/Projects/graph-c-plus/build && $(MAKE) -f src/CMakeFiles/Graph.dir/build.make src/CMakeFiles/Graph.dir/build
-.PHONY : Graph/fast
-
-# Convenience name for target.
 src/CMakeFiles/main.dir/rule:
 	cd /home/reinaldo/Projects/graph-c-plus/build && $(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/main.dir/rule
 .PHONY : src/CMakeFiles/main.dir/rule
@@ -146,7 +131,7 @@ Graph.o: Graph.cpp.o
 
 # target to build an object file
 Graph.cpp.o:
-	cd /home/reinaldo/Projects/graph-c-plus/build && $(MAKE) -f src/CMakeFiles/Graph.dir/build.make src/CMakeFiles/Graph.dir/Graph.cpp.o
+	cd /home/reinaldo/Projects/graph-c-plus/build && $(MAKE) -f src/CMakeFiles/main.dir/build.make src/CMakeFiles/main.dir/Graph.cpp.o
 .PHONY : Graph.cpp.o
 
 Graph.i: Graph.cpp.i
@@ -155,7 +140,7 @@ Graph.i: Graph.cpp.i
 
 # target to preprocess a source file
 Graph.cpp.i:
-	cd /home/reinaldo/Projects/graph-c-plus/build && $(MAKE) -f src/CMakeFiles/Graph.dir/build.make src/CMakeFiles/Graph.dir/Graph.cpp.i
+	cd /home/reinaldo/Projects/graph-c-plus/build && $(MAKE) -f src/CMakeFiles/main.dir/build.make src/CMakeFiles/main.dir/Graph.cpp.i
 .PHONY : Graph.cpp.i
 
 Graph.s: Graph.cpp.s
@@ -164,7 +149,7 @@ Graph.s: Graph.cpp.s
 
 # target to generate assembly for a file
 Graph.cpp.s:
-	cd /home/reinaldo/Projects/graph-c-plus/build && $(MAKE) -f src/CMakeFiles/Graph.dir/build.make src/CMakeFiles/Graph.dir/Graph.cpp.s
+	cd /home/reinaldo/Projects/graph-c-plus/build && $(MAKE) -f src/CMakeFiles/main.dir/build.make src/CMakeFiles/main.dir/Graph.cpp.s
 .PHONY : Graph.cpp.s
 
 main.o: main.cpp.o
@@ -201,7 +186,6 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
-	@echo "... Graph"
 	@echo "... edit_cache"
 	@echo "... main"
 	@echo "... Graph.o"

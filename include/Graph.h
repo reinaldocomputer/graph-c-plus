@@ -2,19 +2,24 @@
 
 class Graph{
 private:
+    struct edge{
+        int dest;
+        int weight;
+
+        edge(){
+            dest = 0;
+            weight = 0;
+        }
+    };
     int V;
-    std::vector<int> *adj;
+    std::vector<std::vector<struct edge> > adj;
 protected:
 
 public:
-    Graph(int V)
-    {
-        this->V = V;
-        adj = new std::vector<int>(V);
-    }
+    Graph(int V);
+    ~Graph(){}
 
-    ~Graph()
-    {
-       delete adj;
-    }
+    bool add_edge(int ori, int dest, int weight);
+    bool print_edges();
+
 };

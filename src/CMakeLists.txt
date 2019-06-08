@@ -1,7 +1,3 @@
-add_executable(main  main.cpp)
-
-add_library(Graph STATIC Graph.cpp)
-target_link_libraries(
-    Graph
-)
+FILE(GLOB SRCS *.cpp)
+add_executable(main ${SRCS})
 include_directories(./)

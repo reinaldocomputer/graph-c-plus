@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string.h>
 #include <stdio.h>
-#include "../include/Graph.h"
+#include "Graph.h"
 
 /*
     -i | input file
@@ -20,14 +20,17 @@ void processing(char *file_name)
     int V, A, ori, dest, weight;
     std::cout << "Processing:" << file_name << std::endl;
     while(fscanf(pFile, " %d", &V) !=  EOF){
-        // Graph mygraph(V);
+        Graph mygraph(V);
         fscanf(pFile, " %d", &A);
         for (int i = 0; i < A; i++)
         {
             fscanf(pFile, " %d", &ori);
             fscanf(pFile, " %d", &dest);
             fscanf(pFile, " %d", &weight);
+            
+            mygraph.add_edge(ori, dest, weight);
         }
+        mygraph.print_edges();
     }
     fclose(pFile);
 }

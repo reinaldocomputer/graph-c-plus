@@ -1,2 +1,0 @@
-/usr/bin/ar qc libGraph.a  CMakeFiles/Graph.dir/Graph.cpp.o
-/usr/bin/ranlib libGraph.a

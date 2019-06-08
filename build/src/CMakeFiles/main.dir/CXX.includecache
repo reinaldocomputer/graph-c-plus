@@ -6,8 +6,16 @@
 
 #IncludeRegexTransform: 
 
-/home/reinaldo/Projects/graph-c-plus/include/Graph.h
+../include/Graph.h
 vector
+-
+
+/home/reinaldo/Projects/graph-c-plus/src/Graph.cpp
+Graph.h
+/home/reinaldo/Projects/graph-c-plus/src/Graph.h
+exception
+-
+iostream
 -
 
 /home/reinaldo/Projects/graph-c-plus/src/main.cpp
@@ -17,6 +25,6 @@ string.h
 -
 stdio.h
 -
-../include/Graph.h
-/home/reinaldo/Projects/graph-c-plus/include/Graph.h
+Graph.h
+/home/reinaldo/Projects/graph-c-plus/src/Graph.h
 
