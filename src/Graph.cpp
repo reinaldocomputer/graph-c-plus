@@ -9,25 +9,44 @@
 */
 
 
-bool Graph::dfs_visit(int v, bool visited[], enum dfs_option option, unsigned int lvl)
+bool Graph::detect_cyclic()
+{
+    for (int i = 0; i < this->V; i++)
+    {
+        dfs(i, Graph::cyclic);
+        if(is_cyclic) return true;
+    }
+    return false;
+}
+
+bool Graph::dfs_visit(int v, int visited[], enum dfs_option option, unsigned int lvl)
 {
     try{
-        visited[v] = true;
+        visited[v] = Graph::gray;
+        bool detect_cyclic = false;
         switch(option){
                 case print:
                     for(unsigned int i = 0; i < lvl; i++) std::cout<<"  ";
                     std::cout<<"["<<v<<"]"<<std::endl;
                 break;
-
+                case cyclic:
+                    if(this->is_cyclic) return true;
+                    detect_cyclic = true;
+                break;
                 default:
                 break;
         }
 
         for (unsigned int i = 0; i < this->adj[v].size(); i++)
         {
-            if(!visited[adj[v][i].dest])
+            if(visited[adj[v][i].dest] == Graph::white){
                 dfs_visit(adj[v][i].dest, visited, option, lvl+1);
-        }
+            }
+            else if(detect_cyclic && visited[adj[v][i].dest] == Graph::gray){
+                this->is_cyclic = true;
+            }
+        } 
+        visited[v] = Graph::black;
     }
     catch(std::exception &e){
         std::cout<<"Error in dfs_visit"<<std::endl;
@@ -39,7 +58,7 @@ bool Graph::dfs_visit(int v, bool visited[], enum dfs_option option, unsigned in
 bool Graph::dfs(int v, enum dfs_option option)
 {
     try{
-        bool visited[this->V] = {};
+        int visited[this->V] = {};
         dfs_visit(v, visited, option, 0);
     } catch(std::exception &e){
         std::cout<<"Error in DFS"<<std::endl;
@@ -105,6 +124,7 @@ Graph::Graph(int V)
     this->V = V;
     this->adj = std::vector<std::vector <struct edge> >(V);
     this->degree_of_vertices = std::vector<int>(V,0);
+    this->is_cyclic = false;
 }
 
 bool Graph::print_edges()

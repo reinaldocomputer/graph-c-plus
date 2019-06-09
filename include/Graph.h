@@ -4,8 +4,14 @@ class Graph{
     public:
     enum dfs_option{
         print = 0,
-        ordenation,
+        cyclic,
         fin,
+    };
+
+    enum vertice_color{
+        white,
+        gray,
+        black,
     };    
 
     Graph(int V);
@@ -15,6 +21,8 @@ class Graph{
     bool print_edges();
     bool print_degree_vertices();
     bool dfs(int v, enum dfs_option option);
+    bool is_cyclic;
+    bool detect_cyclic();
 
 private:
     struct edge{
@@ -32,6 +40,5 @@ private:
     std::vector<std::vector<struct edge> > adj;
 
     bool calc_degree_vertices();
-    bool dfs_visit(int v, bool visited[], enum dfs_option option, unsigned int lvl);
-
+    bool dfs_visit(int v, int visited[], enum dfs_option option, unsigned int lvl);
 };

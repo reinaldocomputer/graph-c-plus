@@ -35,6 +35,7 @@ $ bin/main -i tests/*.txt
 ### Features
 * Vertices Degrees
 * DFS - Depth-First Search Method
+* Detect Cycle
 
 
 ## Contact
