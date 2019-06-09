@@ -4,7 +4,8 @@
 #include "Graph.h"
 
 /*
-    -i | input file
+    Menu option
+        -i | input file
 */
 
 void processing(char *file_name)
@@ -16,7 +17,6 @@ void processing(char *file_name)
         return ;
     }
 
-    char aux_input[100];
     int V, A, ori, dest, weight;
     std::cout << "Processing:" << file_name << std::endl;
     while(fscanf(pFile, " %d", &V) !=  EOF){
@@ -30,8 +30,9 @@ void processing(char *file_name)
             
             mygraph.add_edge(ori, dest, weight);
         }
-        mygraph.print_edges();
+        // mygraph.print_edges();
         mygraph.print_degree_vertices();
+        mygraph.dfs(0,Graph::print);
     }
     fclose(pFile);
 }
