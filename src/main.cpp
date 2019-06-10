@@ -31,11 +31,10 @@ void processing(char *file_name)
             mygraph.add_edge(ori, dest, weight);
         }
         // mygraph.print_edges();
-        // mygraph.print_degree_vertices();
         // mygraph.dfs(0,Graph::dfs_print);
         //if(mygraph.detect_cyclic()) std::cout<<"Cycle Detected"<<std::endl;
-        mygraph.topological_sort(Graph::topo_print);
-
+        // mygraph.topological_sort(Graph::topo_print);
+        mygraph.calc_degree_vertices(Graph::g_print);
     }
     fclose(pFile);
 }

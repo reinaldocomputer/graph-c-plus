@@ -8,6 +8,19 @@
 
 */
 
+// bool Graph::bfs(int v, enum general_option option)
+// {
+//     try{
+//         // Mark all vertices as white (not visited).
+//         int visited[this->V] = {};
+
+    
+//     }catch(std::exception &e){
+//         std::cout<<"BFS Error"<<std::endl;
+//         return false;
+//     }
+//     return true
+// }
 
 bool Graph::topological_sort(enum topological_sort_option option)
 {
@@ -104,6 +117,7 @@ bool Graph::dfs_visit(int v, int visited[], enum dfs_option option, unsigned int
 bool Graph::dfs(int v, enum dfs_option option)
 {
     try{
+        // Mark all vertice as white (not visited)
         int visited[this->V] = {};
         dfs_visit(v, visited, option, 0);
     } catch(std::exception &e){
@@ -113,7 +127,7 @@ bool Graph::dfs(int v, enum dfs_option option)
     return true;
 }
 
-bool Graph::calc_degree_vertices()
+bool Graph::calc_degree_vertices(enum general_option option)
 {
     try{
         for (unsigned int i = 0; i < this->adj.size(); i++)
@@ -123,6 +137,14 @@ bool Graph::calc_degree_vertices()
                 degree_of_vertices[adj[i][j].dest]++;
             }
         }
+        switch(option){
+            case g_print:
+                print_degree_vertices();
+            break;
+            default:
+            break;
+        }
+
     }catch(std::exception &e){
         std::cout << "Problem in Calc Degree Vertices" << std::endl;
         return false;
@@ -133,9 +155,6 @@ bool Graph::calc_degree_vertices()
 
 bool Graph::print_degree_vertices()
 {
-    if(!calc_degree_vertices()){
-        return false;
-    }
     try
     {
         std::cout << "Degree of Vertices" << std::endl;
