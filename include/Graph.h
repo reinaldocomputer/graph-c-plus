@@ -1,11 +1,16 @@
 #include <vector>
+#include <stack>
 
 class Graph{
     public:
     enum dfs_option{
-        print = 0,
-        cyclic,
-        fin,
+        dfs_print = 0,
+        dfs_cyclic,
+        dfs_topological_sort,
+    };
+
+    enum topological_sort_option{
+        topo_print = 0,
     };
 
     enum vertice_color{
@@ -23,6 +28,7 @@ class Graph{
     bool dfs(int v, enum dfs_option option);
     bool is_cyclic;
     bool detect_cyclic();
+    bool topological_sort(enum topological_sort_option option);
 
 private:
     struct edge{
@@ -38,7 +44,7 @@ private:
     int V;
     std::vector <int> degree_of_vertices;
     std::vector<std::vector<struct edge> > adj;
-
+    std::stack<int> topological_order;
     bool calc_degree_vertices();
     bool dfs_visit(int v, int visited[], enum dfs_option option, unsigned int lvl);
 };

@@ -9,11 +9,49 @@
 */
 
 
+bool Graph::topological_sort(enum topological_sort_option option)
+{
+    if(detect_cyclic()){
+        std::cout<<"Topological Sort Error: Cyclic Graph"<<std::endl;
+        return false;
+    }
+    try{
+        bool print_option = false;
+
+        switch(option){
+            case topo_print:
+                print_option = true;
+            break;
+            default:
+            break;
+        }
+        int visited[this->V] = {};
+        for (int i = 0; i < this->V; i++)
+        {
+            dfs_visit(i, visited, Graph::dfs_topological_sort, 0);
+        }
+
+        if(print_option){
+            std::cout<<"Topological Sort"<<std::endl;
+            while(not topological_order.empty()){
+                int c_vertice = topological_order.top();
+                topological_order.pop();
+                std::cout << "[" << c_vertice << "]" << std::endl; 
+            }
+        }
+    }catch(std::exception &e){
+        std::cout<<"Topological Sort Error " << e.what() <<std::endl;
+        return false;
+    }
+
+    return true;
+}
+
 bool Graph::detect_cyclic()
 {
     for (int i = 0; i < this->V; i++)
     {
-        dfs(i, Graph::cyclic);
+        dfs(i, Graph::dfs_cyclic);
         if(is_cyclic) return true;
     }
     return false;
@@ -22,16 +60,24 @@ bool Graph::detect_cyclic()
 bool Graph::dfs_visit(int v, int visited[], enum dfs_option option, unsigned int lvl)
 {
     try{
+        if(not visited[v] == Graph::white){
+            return false;
+        }
         visited[v] = Graph::gray;
         bool detect_cyclic = false;
+        bool topological_sort_option = false;
+
         switch(option){
-                case print:
+                case dfs_print:
                     for(unsigned int i = 0; i < lvl; i++) std::cout<<"  ";
                     std::cout<<"["<<v<<"]"<<std::endl;
                 break;
-                case cyclic:
+                case dfs_cyclic:
                     if(this->is_cyclic) return true;
                     detect_cyclic = true;
+                break;
+                case dfs_topological_sort:
+                    topological_sort_option = true;
                 break;
                 default:
                 break;
@@ -39,14 +85,14 @@ bool Graph::dfs_visit(int v, int visited[], enum dfs_option option, unsigned int
 
         for (unsigned int i = 0; i < this->adj[v].size(); i++)
         {
-            if(visited[adj[v][i].dest] == Graph::white){
-                dfs_visit(adj[v][i].dest, visited, option, lvl+1);
-            }
-            else if(detect_cyclic && visited[adj[v][i].dest] == Graph::gray){
+            dfs_visit(adj[v][i].dest, visited, option, lvl+1);
+            if(detect_cyclic && visited[adj[v][i].dest] == Graph::gray){
                 this->is_cyclic = true;
             }
         } 
         visited[v] = Graph::black;
+        if(topological_sort_option) this->topological_order.push(v);
+
     }
     catch(std::exception &e){
         std::cout<<"Error in dfs_visit"<<std::endl;

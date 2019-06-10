@@ -36,6 +36,7 @@ $ bin/main -i tests/*.txt
 * Vertices Degrees
 * DFS - Depth-First Search Method
 * Detect Cycle
+* Topological Sort
 
 
 ## Contact

@@ -9,6 +9,8 @@
 ../include/Graph.h
 vector
 -
+stack
+-
 
 /home/reinaldo/Projects/graph-c-plus/src/Graph.cpp
 Graph.h

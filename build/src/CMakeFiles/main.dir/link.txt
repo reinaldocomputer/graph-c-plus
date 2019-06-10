@@ -1,1 +1,1 @@
-/usr/bin/c++      CMakeFiles/main.dir/Graph.cpp.o CMakeFiles/main.dir/main.cpp.o  -o ../../bin/main -rdynamic 
+/usr/bin/c++   -g -W -Wall -Werror   CMakeFiles/main.dir/Graph.cpp.o CMakeFiles/main.dir/main.cpp.o  -o ../../bin/main -rdynamic 
