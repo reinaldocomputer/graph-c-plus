@@ -1,6 +1,20 @@
 #include <vector>
 #include <stack>
 
+struct edge{
+    int dest;
+    int weight;
+
+    edge(){
+        dest = 0;
+        weight = 0;
+    }
+    edge(int d, int w){
+        dest = d;
+        weight = w;
+    }
+};
+
 class Graph{
     public:
     enum general_option{
@@ -28,6 +42,7 @@ class Graph{
     ~Graph(){}
 
     bool add_edge(int ori, int dest, int weight);
+    bool add_edge(int ori, struct edge new_edge);
     bool print_edges();
     bool dfs(int v, enum dfs_option option);
     bool bfs(int v, enum general_option option);
@@ -36,19 +51,10 @@ class Graph{
     bool topological_sort(enum topological_sort_option option);
     bool calc_degree_vertices(enum general_option option);
     bool is_connected_graph();
+    Graph get_transpose();
 
 private:
-    struct edge{
-        int dest;
-        int weight;
-
-        edge(){
-            dest = 0;
-            weight = 0;
-        }
-    };
-
-    int V;
+    unsigned int V;
     std::vector <int> degree_of_vertices;
     std::vector<std::vector<struct edge> > adj;
     std::stack<int> topological_order;

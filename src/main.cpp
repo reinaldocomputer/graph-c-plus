@@ -36,9 +36,10 @@ void processing(char *file_name)
         // mygraph.topological_sort(Graph::topo_print);
         // mygraph.calc_degree_vertices(Graph::g_print);
         // mygraph.bfs(0, Graph::g_print);
-        std::cout << "Connected Graph"<<std::endl;
-        if(mygraph.is_connected_graph()) std::cout<<"is connected"<<std::endl;
-        else std::cout<<"isn't connected"<<std::endl;
+        // std::cout << "Connected Graph"<<std::endl;
+        // if(mygraph.is_connected_graph()) std::cout<<"is connected"<<std::endl;
+        // else std::cout<<"isn't connected"<<std::endl;
+        mygraph.get_transpose().print_edges();
     }
     fclose(pFile);
 }

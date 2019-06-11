@@ -9,12 +9,38 @@
 
 */
 
+bool Graph::add_edge(int ori, struct edge new_edge)
+{
+    try{
+        this->adj[ori].push_back(new_edge);
+    }catch(std::exception &e){
+        std::cout<<"Add Edge Error"<<std::endl;
+        return false;
+    }
+    return true;
+}
+
+Graph Graph::get_transpose()
+{
+    Graph transpose(this->V);
+
+    for(unsigned int i = 0; i < this->V; i++){
+        for(unsigned int j = 0; j < this->adj[i].size();j++){
+            int new_ori = this->adj[i][j].dest;
+            struct edge new_edge(i, this->adj[i][j].weight);
+            transpose.add_edge(new_ori, new_edge);
+        }
+    }
+
+    return transpose;
+}
+
 bool Graph::is_connected_graph()
 {
-    for(int i = 0; i < this->V; i++){
+    for(unsigned int i = 0; i < this->V; i++){
         int visited[this->V] = {};
         dfs_visit(i, visited, dfs_default, 0);
-        for(int j = 0;j<this->V;j++) if(visited[j] == white) return false;
+        for(unsigned int j = 0;j<this->V;j++) if(visited[j] == white) return false;
     }
 
     return true;
@@ -76,8 +102,7 @@ bool Graph::topological_sort(enum topological_sort_option option)
             break;
         }
         int visited[this->V] = {};
-        for (int i = 0; i < this->V; i++)
-        {
+        for(unsigned int i = 0; i < this->V; i++){
             dfs_visit(i, visited, Graph::dfs_topological_sort, 0);
         }
 
@@ -99,8 +124,7 @@ bool Graph::topological_sort(enum topological_sort_option option)
 
 bool Graph::detect_cyclic()
 {
-    for (int i = 0; i < this->V; i++)
-    {
+    for (unsigned int i = 0; i < this->V; i++){
         dfs(i, Graph::dfs_cyclic);
         if(is_cyclic) return true;
     }
