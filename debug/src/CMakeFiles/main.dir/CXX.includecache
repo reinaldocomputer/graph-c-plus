@@ -9,6 +9,8 @@
 ../include/Graph.h
 vector
 -
+stack
+-
 
 /home/reinaldo/Projects/graph-c-plus/src/Graph.cpp
 Graph.h
@@ -16,6 +18,8 @@ Graph.h
 exception
 -
 iostream
+-
+queue
 -
 
 /home/reinaldo/Projects/graph-c-plus/src/main.cpp

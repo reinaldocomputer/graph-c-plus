@@ -11,6 +11,7 @@ class Graph{
         dfs_print = 0,
         dfs_cyclic,
         dfs_topological_sort,
+        dfs_default
     };
 
     enum topological_sort_option{
@@ -34,6 +35,7 @@ class Graph{
     bool detect_cyclic();
     bool topological_sort(enum topological_sort_option option);
     bool calc_degree_vertices(enum general_option option);
+    bool is_connected_graph();
 
 private:
     struct edge{

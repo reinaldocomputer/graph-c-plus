@@ -35,7 +35,10 @@ void processing(char *file_name)
         //if(mygraph.detect_cyclic()) std::cout<<"Cycle Detected"<<std::endl;
         // mygraph.topological_sort(Graph::topo_print);
         // mygraph.calc_degree_vertices(Graph::g_print);
-        mygraph.bfs(0, Graph::g_print);
+        // mygraph.bfs(0, Graph::g_print);
+        std::cout << "Connected Graph"<<std::endl;
+        if(mygraph.is_connected_graph()) std::cout<<"is connected"<<std::endl;
+        else std::cout<<"isn't connected"<<std::endl;
     }
     fclose(pFile);
 }

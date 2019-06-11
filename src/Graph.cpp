@@ -9,6 +9,17 @@
 
 */
 
+bool Graph::is_connected_graph()
+{
+    for(int i = 0; i < this->V; i++){
+        int visited[this->V] = {};
+        dfs_visit(i, visited, dfs_default, 0);
+        for(int j = 0;j<this->V;j++) if(visited[j] == white) return false;
+    }
+
+    return true;
+}
+
 bool Graph::bfs(int v, enum general_option option)
 {
     try{
