@@ -34,7 +34,8 @@ void processing(char *file_name)
         // mygraph.dfs(0,Graph::dfs_print);
         //if(mygraph.detect_cyclic()) std::cout<<"Cycle Detected"<<std::endl;
         // mygraph.topological_sort(Graph::topo_print);
-        mygraph.calc_degree_vertices(Graph::g_print);
+        // mygraph.calc_degree_vertices(Graph::g_print);
+        mygraph.bfs(0, Graph::g_print);
     }
     fclose(pFile);
 }

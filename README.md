@@ -34,7 +34,8 @@ $ bin/main -i tests/*.txt
 
 ### Features
 * Vertices Degrees
-* DFS - Depth-First Search Method
+* BFS - BFS Breadth-First Search
+* DFS - Depth-First Search
 * Detect Cycle
 * Topological Sort
 

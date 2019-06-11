@@ -1,6 +1,7 @@
 #include "Graph.h"
 #include <exception>
 #include <iostream>
+#include <queue>
 
 /*
     option list
@@ -8,19 +9,44 @@
 
 */
 
-// bool Graph::bfs(int v, enum general_option option)
-// {
-//     try{
-//         // Mark all vertices as white (not visited).
-//         int visited[this->V] = {};
+bool Graph::bfs(int v, enum general_option option)
+{
+    try{
+        // Mark all vertices as white (not visited).
+        int visited[this->V] = {};
+        std::queue <int> q;
+        q.push(v);
+
+        while(!q.empty()){
+            int current = q.front();
+            q.pop();
+            //Mark vertice as visited
+            if(visited[current] == white){
+                visited[current] = gray;
+
+                switch(option){
+                    case g_print:
+                        std::cout<<"["<<current<<"]"<<std::endl;
+                    break;
+                    default:
+                    break;
+                }
+
+                for (unsigned int i = 0; i < adj[current].size(); i++)
+                {
+                    int dest = adj[current][i].dest;
+                    q.push(dest);
+                }
+            }
+        }
 
     
-//     }catch(std::exception &e){
-//         std::cout<<"BFS Error"<<std::endl;
-//         return false;
-//     }
-//     return true
-// }
+    }catch(std::exception &e){
+        std::cout<<"BFS Error"<<std::endl;
+        return false;
+    }
+    return true;
+}
 
 bool Graph::topological_sort(enum topological_sort_option option)
 {

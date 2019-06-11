@@ -19,6 +19,8 @@ exception
 -
 iostream
 -
+queue
+-
 
 /home/reinaldo/Projects/graph-c-plus/src/main.cpp
 iostream

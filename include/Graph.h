@@ -29,7 +29,7 @@ class Graph{
     bool add_edge(int ori, int dest, int weight);
     bool print_edges();
     bool dfs(int v, enum dfs_option option);
-    // bool bfs(int v, enum general_option option);
+    bool bfs(int v, enum general_option option);
     bool is_cyclic;
     bool detect_cyclic();
     bool topological_sort(enum topological_sort_option option);
