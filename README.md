@@ -38,7 +38,7 @@ $ bin/main -i tests/*.txt
 * DFS - Depth-First Search
 * Detect Cycle
 * Topological Sort
-
+* Strongly Connected Components
 
 ## Contact
 

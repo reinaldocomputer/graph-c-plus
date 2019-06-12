@@ -25,7 +25,8 @@ class Graph{
         dfs_print = 0,
         dfs_cyclic,
         dfs_topological_sort,
-        dfs_default
+        dfs_scc,
+        dfs_default,
     };
 
     enum topological_sort_option{
@@ -44,13 +45,15 @@ class Graph{
     bool add_edge(int ori, int dest, int weight);
     bool add_edge(int ori, struct edge new_edge);
     bool print_edges();
-    bool dfs(int v, enum dfs_option option);
+    bool dfs(enum dfs_option option);
     bool bfs(int v, enum general_option option);
     bool is_cyclic;
     bool detect_cyclic();
     bool topological_sort(enum topological_sort_option option);
     bool calc_degree_vertices(enum general_option option);
     bool is_connected_graph();
+    bool strongly_connected_components(enum general_option option);
+    std::vector<std::vector <struct edge > > get_adj();
     Graph get_transpose();
 
 private:
@@ -58,6 +61,8 @@ private:
     std::vector <int> degree_of_vertices;
     std::vector<std::vector<struct edge> > adj;
     std::stack<int> topological_order;
+    std::stack<int> scc_stack;  
     bool dfs_visit(int v, int visited[], enum dfs_option option, unsigned int lvl);
     bool print_degree_vertices();
+    bool scc_visit(int v, int visited[], Graph &T, enum general_option option);
 };

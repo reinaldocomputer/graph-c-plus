@@ -39,7 +39,8 @@ void processing(char *file_name)
         // std::cout << "Connected Graph"<<std::endl;
         // if(mygraph.is_connected_graph()) std::cout<<"is connected"<<std::endl;
         // else std::cout<<"isn't connected"<<std::endl;
-        mygraph.get_transpose().print_edges();
+        // mygraph.get_transpose().print_edges();
+        mygraph.strongly_connected_components(Graph::g_print);
     }
     fclose(pFile);
 }

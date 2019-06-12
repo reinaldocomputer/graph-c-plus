@@ -9,6 +9,54 @@
 
 */
 
+std::vector<std::vector <struct edge> >Graph::get_adj()
+{
+    return this->adj;
+}
+
+bool Graph::scc_visit(int v, int visited[], Graph &T, enum general_option option)
+{
+    if(visited[v] == white){
+        if(option == g_print) std::cout <<"["<<v<<"]"<< " ";
+        visited[v] = gray;
+        for(unsigned int i=0; i < T.get_adj()[v].size(); i++)
+        {
+            scc_visit(T.get_adj()[v][i].dest, visited, T, option);
+        }
+        visited[v] = black;
+    }
+    return true;
+}
+
+bool Graph::strongly_connected_components(enum general_option option)
+{
+    //Kosaraju's Algorithm
+    dfs(dfs_scc);
+
+    Graph T = this->get_transpose();
+
+    //Mark all vertices as white (not visited)
+    int visited[this->V] = {};
+
+    bool print = false;
+    switch(option){
+        case g_print:
+            print = true;
+            std::cout<<"Strongly Connected Components"<<std::endl;
+        break;
+        default:
+        break;
+    }
+    while(not this->scc_stack.empty()){
+        if(print) std::cout<<std::endl;
+        int current = this->scc_stack.top();
+        this->scc_stack.pop();
+        scc_visit(current, visited, T, option);
+    }
+    if(print) std::cout<<std::endl;
+    return true;
+}
+
 bool Graph::add_edge(int ori, struct edge new_edge)
 {
     try{
@@ -124,10 +172,8 @@ bool Graph::topological_sort(enum topological_sort_option option)
 
 bool Graph::detect_cyclic()
 {
-    for (unsigned int i = 0; i < this->V; i++){
-        dfs(i, Graph::dfs_cyclic);
-        if(is_cyclic) return true;
-    }
+    dfs(Graph::dfs_cyclic);
+    if(is_cyclic) return true;
     return false;
 }
 
@@ -140,6 +186,7 @@ bool Graph::dfs_visit(int v, int visited[], enum dfs_option option, unsigned int
         visited[v] = Graph::gray;
         bool detect_cyclic = false;
         bool topological_sort_option = false;
+        bool scc = false;
 
         switch(option){
                 case dfs_print:
@@ -152,6 +199,9 @@ bool Graph::dfs_visit(int v, int visited[], enum dfs_option option, unsigned int
                 break;
                 case dfs_topological_sort:
                     topological_sort_option = true;
+                break;
+                case dfs_scc:
+                    scc = true;
                 break;
                 default:
                 break;
@@ -166,6 +216,7 @@ bool Graph::dfs_visit(int v, int visited[], enum dfs_option option, unsigned int
         } 
         visited[v] = Graph::black;
         if(topological_sort_option) this->topological_order.push(v);
+        if(scc) this->scc_stack.push(v);
 
     }
     catch(std::exception &e){
@@ -175,12 +226,13 @@ bool Graph::dfs_visit(int v, int visited[], enum dfs_option option, unsigned int
     return true;
 }
 
-bool Graph::dfs(int v, enum dfs_option option)
+bool Graph::dfs(enum dfs_option option)
 {
     try{
         // Mark all vertice as white (not visited)
         int visited[this->V] = {};
-        dfs_visit(v, visited, option, 0);
+        for(unsigned int i = 0;i < this->V; i++)
+            dfs_visit(i, visited, option, 0);
     } catch(std::exception &e){
         std::cout<<"Error in DFS"<<std::endl;
         return false;
