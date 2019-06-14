@@ -13,6 +13,11 @@ struct edge{
         dest = d;
         weight = w;
     }
+
+    bool operator <=(struct edge b) const{
+        if(weight < b.weight) return true;
+        return false;
+    }
 };
 
 class Graph{
@@ -29,6 +34,10 @@ class Graph{
         dfs_default,
     };
 
+    enum mst_algorithm{
+        mst_prim,
+        mst_kruskal,
+    };
     enum topological_sort_option{
         topo_print = 0,
     };
@@ -55,7 +64,7 @@ class Graph{
     bool strongly_connected_components(enum general_option option);
     std::vector<std::vector <struct edge > > get_adj();
     Graph get_transpose();
-
+    std::vector<int> minimum_spanning_tree(mst_algorithm algorithm, general_option option);
 private:
     unsigned int V;
     std::vector <int> degree_of_vertices;

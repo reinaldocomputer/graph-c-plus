@@ -2,12 +2,76 @@
 #include <exception>
 #include <iostream>
 #include <queue>
+#include <limits>
+int INF = std::numeric_limits<int>::max();
+
 
 /*
     option list
     0 - print
 
 */
+
+std::vector <int> Graph::minimum_spanning_tree(mst_algorithm algorithm, general_option option)
+{
+    std::vector<int> parent(this->V, -1); 
+    bool print = false;
+
+    switch(option){
+        case g_print:
+            print = true;
+            std::cout<<"Minimum Spanning Tree"<<std::endl;
+        break;
+        default:
+        break;
+    }
+
+    switch(algorithm){
+        case mst_prim:
+            {
+                if(print) std::cout<<"Prim Algorithm"<<std::endl;
+                // Mark all vertices as white
+                int visited[this->V] = {};
+                // int parent[this->V] = {};
+                int source = 0;
+
+                std::vector<int>v_weights(this->V, INF);
+
+                // std::priority_queue<std::pair <int,int> > Q;
+                std::priority_queue< std::pair <int,int>, std::vector <std::pair <int,int> > , std::greater<std::pair <int,int> > > Q; 
+
+                v_weights[source] = 0;
+
+                Q.push(std::make_pair(0,source));
+                while(!Q.empty()){
+                    //Current vertice
+                    int c_v = Q.top().second;
+                    //Current Weight
+                    Q.pop();
+                    visited[c_v] = gray;
+                    for(unsigned int i=0; i < this->adj[c_v].size();i++){
+                        int a_dest = this->adj[c_v][i].dest;
+                        int a_weight = this->adj[c_v][i].weight;
+                        if(visited[a_dest] == white && v_weights[a_dest] > a_weight){
+                            v_weights[a_dest] = a_weight;
+                            Q.push(std::make_pair(a_weight, a_dest));
+                            parent[a_dest] = c_v;
+                        }
+                    }
+                }
+            }
+        break;
+        case mst_kruskal:
+        default:
+        if(print) std::cout<<"Kruskal Algorithm"<<std::endl;
+        break;
+    }
+    if(print){
+        for(unsigned int i=0;i < parent.size();i++)
+            std::cout<< parent[i] << " - " <<  i << std::endl;
+    }
+    return parent;
+}
 
 std::vector<std::vector <struct edge> >Graph::get_adj()
 {
