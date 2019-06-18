@@ -3,12 +3,16 @@
 #include <stdio.h>
 #include "Graph.h"
 
+enum operation{
+    op_none = 0,
+    op_test = 1,
+};
 /*
     Menu option
         -i | input file
 */
 
-void processing(char *file_name)
+void processing(char *file_name, enum operation op)
 {
     FILE *pFile;
     pFile = fopen(file_name,"r+");
@@ -30,18 +34,21 @@ void processing(char *file_name)
             
             mygraph.add_edge(ori, dest, weight);
         }
-        // mygraph.print_edges();
-        // mygraph.dfs(0,Graph::dfs_print);
-        //if(mygraph.detect_cyclic()) std::cout<<"Cycle Detected"<<std::endl;
-        // mygraph.topological_sort(Graph::topo_print);
-        // mygraph.calc_degree_vertices(Graph::g_print);
-        // mygraph.bfs(0, Graph::g_print);
-        // std::cout << "Connected Graph"<<std::endl;
-        // if(mygraph.is_connected_graph()) std::cout<<"is connected"<<std::endl;
-        // else std::cout<<"isn't connected"<<std::endl;
-        // mygraph.get_transpose().print_edges();
-        // mygraph.strongly_connected_components(Graph::g_print);
-        mygraph.minimum_spanning_tree(Graph::mst_kruskal, Graph::g_print);
+        switch(op){
+            case op_test:
+                mygraph.print_edges();
+                mygraph.calc_degree_vertices(Graph::g_print);
+                mygraph.bfs(0, Graph::g_print);
+                if(mygraph.detect_cyclic()) std::cout<<"Cycle Detected"<<std::endl;
+                mygraph.topological_sort(Graph::topo_print);
+                mygraph.strongly_connected_components(Graph::g_print);
+                mygraph.minimum_spanning_tree(Graph::mst_prim, Graph::g_print);
+                mygraph.minimum_spanning_tree(Graph::mst_kruskal, Graph::g_print);
+             break;
+             case op_none:
+             default:
+             break;
+        }
     }
     fclose(pFile);
 }
@@ -51,11 +58,19 @@ int main(int argc, char *argv[])
     if(strcmp(argv[1],"-i") == 0){
         for (int i = 2; i < argc; i++)
         {
-            processing(argv[i]);
+            processing(argv[i], op_none);
         }        
     }
-    else if(strcmp(argv[1],"-h") == 0)
+    else if(strcmp(argv[1],"-it") == 0){
+        for (int i = 2; i < argc; i++)
+        {
+            processing(argv[i], op_test);
+        }        
+    }    
+    else if(strcmp(argv[1],"-h") == 0){
         std::cout << "-i | Input File" << std::endl;
+        std::cout << "-it | Input File and Test" << std::endl;
+    }
     else std::cout << "Choose a valid option" << std::endl;
 
 
