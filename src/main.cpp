@@ -41,7 +41,7 @@ void processing(char *file_name)
         // else std::cout<<"isn't connected"<<std::endl;
         // mygraph.get_transpose().print_edges();
         // mygraph.strongly_connected_components(Graph::g_print);
-        mygraph.minimum_spanning_tree(Graph::mst_prim, Graph::g_print);
+        mygraph.minimum_spanning_tree(Graph::mst_kruskal, Graph::g_print);
     }
     fclose(pFile);
 }

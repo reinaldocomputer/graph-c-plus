@@ -3,6 +3,7 @@
 #include <iostream>
 #include <queue>
 #include <limits>
+#include <algorithm>
 int INF = std::numeric_limits<int>::max();
 
 
@@ -12,6 +13,35 @@ int INF = std::numeric_limits<int>::max();
 
 */
 
+int Graph::get_weight(int i, int j)
+{
+    for(unsigned int aux = 0; aux < adj[i].size();aux++){
+        if(adj[i][aux].dest == j) return adj[i][aux].weight;
+    }
+    return -1;
+}
+
+void Graph::union_set(std::vector <int> &parent, int &origin, int &dest)
+{
+    parent[dest] = origin;
+}
+
+int Graph::find_set(std::vector<int> &parent, int &v)
+{
+    if(v == parent[v]) return v;
+    return find_set(parent, parent[v]);
+}
+
+std::vector <struct edge> Graph::get_vec_edges()
+{
+    std::vector<struct edge> output;
+    for(unsigned int i = 0; i < this->adj.size(); i++){
+        for(unsigned int j = 0; j < this->adj[i].size();j++){
+            output.push_back(adj[i][j]);
+        }
+    }
+    return output;
+}
 std::vector <int> Graph::minimum_spanning_tree(mst_algorithm algorithm, general_option option)
 {
     std::vector<int> parent(this->V, -1); 
@@ -28,47 +58,68 @@ std::vector <int> Graph::minimum_spanning_tree(mst_algorithm algorithm, general_
 
     switch(algorithm){
         case mst_prim:
-            {
-                if(print) std::cout<<"Prim Algorithm"<<std::endl;
-                // Mark all vertices as white
-                int visited[this->V] = {};
-                // int parent[this->V] = {};
-                int source = 0;
+        {
+            if(print) std::cout<<"Prim Algorithm"<<std::endl;
+            // Mark all vertices as white
+            int visited[this->V] = {};
+            int source = 0;
 
-                std::vector<int>v_weights(this->V, INF);
+            std::vector<int>v_weights(this->V, INF);
+            std::priority_queue< std::pair <int,int>, std::vector <std::pair <int,int> > , std::greater<std::pair <int,int> > > Q; 
 
-                // std::priority_queue<std::pair <int,int> > Q;
-                std::priority_queue< std::pair <int,int>, std::vector <std::pair <int,int> > , std::greater<std::pair <int,int> > > Q; 
+            v_weights[source] = 0;
 
-                v_weights[source] = 0;
-
-                Q.push(std::make_pair(0,source));
-                while(!Q.empty()){
-                    //Current vertice
-                    int c_v = Q.top().second;
-                    //Current Weight
-                    Q.pop();
-                    visited[c_v] = gray;
-                    for(unsigned int i=0; i < this->adj[c_v].size();i++){
-                        int a_dest = this->adj[c_v][i].dest;
-                        int a_weight = this->adj[c_v][i].weight;
-                        if(visited[a_dest] == white && v_weights[a_dest] > a_weight){
-                            v_weights[a_dest] = a_weight;
-                            Q.push(std::make_pair(a_weight, a_dest));
-                            parent[a_dest] = c_v;
-                        }
+            Q.push(std::make_pair(0,source));
+            while(!Q.empty()){
+                //Current vertice
+                int c_v = Q.top().second;
+                //Current Weight
+                Q.pop();
+                visited[c_v] = gray;
+                for(unsigned int i=0; i < this->adj[c_v].size();i++){
+                    int a_dest = this->adj[c_v][i].dest;
+                    int a_weight = this->adj[c_v][i].weight;
+                    if(visited[a_dest] == white && v_weights[a_dest] > a_weight){
+                        v_weights[a_dest] = a_weight;
+                        Q.push(std::make_pair(a_weight, a_dest));
+                        parent[a_dest] = c_v;
                     }
                 }
             }
+        if(print){
+            std::cout << "Edge \t Weight\n";
+            for(unsigned int i=0;i < parent.size();i++)
+                if(parent[i] >= 0)
+                    std::cout<< parent[i] << " - " <<  i <<" \t" << get_weight(parent[i], i) << std::endl;
+        }
+        }
         break;
         case mst_kruskal:
+        {
+            if(print) std::cout<<"Kruskal Algorithm"<<std::endl;
+            for(unsigned int i=0;i<parent.size();i++) parent[i] = i;
+
+            std::vector<struct edge> e = get_vec_edges();
+            sort(e.begin(), e.end());
+            while(not e.empty()){
+                struct edge current = e[0];
+                e.erase(e.begin());
+                int x = find_set(parent, current.origin);
+                int y = find_set(parent, current.dest);
+
+                if(x != y)
+                {
+                    union_set(parent, current.origin, current.dest);
+                }
+            }
+            if(print){
+                std::cout << "Edge \t Weight\n";
+                for(unsigned int i=0;i < parent.size();i++)
+                    std::cout<< parent[i] << " - " <<  i <<" \t" << get_weight(parent[i], i) << std::endl;
+            }
+        }
         default:
-        if(print) std::cout<<"Kruskal Algorithm"<<std::endl;
         break;
-    }
-    if(print){
-        for(unsigned int i=0;i < parent.size();i++)
-            std::cout<< parent[i] << " - " <<  i << std::endl;
     }
     return parent;
 }
@@ -350,6 +401,7 @@ bool Graph::add_edge(int ori, int dest, int weight)
 {
     struct edge new_edge;
     try{
+        new_edge.origin = ori;
         new_edge.dest = dest;
         new_edge.weight = weight;
         adj[ori].push_back(new_edge);

@@ -3,18 +3,25 @@
 
 struct edge{
     int dest;
+    int origin;
     int weight;
 
     edge(){
         dest = 0;
+        origin = 0;
         weight = 0;
     }
     edge(int d, int w){
         dest = d;
         weight = w;
     }
+    edge(int o, int d, int w){
+        origin = o;
+        dest = d;
+        weight = w;
+    }
 
-    bool operator <=(struct edge b) const{
+    bool operator <(struct edge b) const{
         if(weight < b.weight) return true;
         return false;
     }
@@ -74,4 +81,8 @@ private:
     bool dfs_visit(int v, int visited[], enum dfs_option option, unsigned int lvl);
     bool print_degree_vertices();
     bool scc_visit(int v, int visited[], Graph &T, enum general_option option);
+    std::vector <struct edge> get_vec_edges();
+    int find_set(std::vector<int> &parent, int &v);
+    void union_set(std::vector <int> &parent, int &origin, int &dest);
+    int get_weight(int i, int j);
 };

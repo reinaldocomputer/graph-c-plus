@@ -39,7 +39,7 @@ $ bin/main -i tests/*.txt
 * Detect Cycle
 * Topological Sort
 * Strongly Connected Components
-* Minimum Spinning Tree (Prim Algorithm)
+* Minimum Spinning Tree (Prim Algorithm / Kruskal Algorithm)
 
 ## Contact
 
