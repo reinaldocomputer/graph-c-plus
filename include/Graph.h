@@ -47,6 +47,7 @@ class Graph{
     };
     enum topological_sort_option{
         topo_print = 0,
+        topo_none,
     };
 
     enum vertice_color{
@@ -72,6 +73,7 @@ class Graph{
     std::vector<std::vector <struct edge > > get_adj();
     Graph get_transpose();
     std::vector<int> minimum_spanning_tree(mst_algorithm algorithm, general_option option);
+    bool dag_sortest_paths(int source, enum general_option opt);
 private:
     unsigned int V;
     std::vector <int> degree_of_vertices;

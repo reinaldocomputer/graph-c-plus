@@ -13,6 +13,50 @@ int INF = std::numeric_limits<int>::max();
 
 */
 
+bool Graph::dag_sortest_paths(int source, enum general_option opt)
+{
+    try{
+        std::vector<int>dist(this->V,INF);
+        std::vector<int>parent(this->V,-1);
+        dist[source] = 0;
+        parent[source] = 0;
+
+        if(not this->topological_sort(Graph::topo_none)){
+            return false;
+        }
+        //finding source
+        while(not topological_order.empty()){
+            if(topological_order.top() != source) topological_order.pop();
+            else break;
+        }
+
+        while(not this->topological_order.empty()){
+            int current = this->topological_order.top();
+            this->topological_order.pop();
+
+            for(unsigned int i=0;i<this->adj[current].size();i++){
+                if(dist[this->adj[current][i].dest] > dist[current] + this->adj[current][i].weight){
+                    dist[this->adj[current][i].dest] = dist[current] + this->adj[current][i].weight;
+                    parent[this->adj[current][i].dest] = current;
+                }
+                
+            }
+        }
+
+        switch(opt){
+            case g_print:
+                std::cout << "Vetex \t Distance from the source\n";
+                for(unsigned int i=0;i < dist.size();i++)
+                    std::cout<< i  <<" \t" << dist[i] << std::endl;
+        }
+    }catch(std::exception &e){
+        std::cout << "Dag Shortest Path Error " << e.what() << std::endl;
+        return false;
+    }
+
+    return true;            
+}   
+
 int Graph::get_weight(int i, int j)
 {
     for(unsigned int aux = 0; aux < adj[i].size();aux++){
@@ -115,7 +159,8 @@ std::vector <int> Graph::minimum_spanning_tree(mst_algorithm algorithm, general_
             if(print){
                 std::cout << "Edge \t Weight\n";
                 for(unsigned int i=0;i < parent.size();i++)
-                    std::cout<< parent[i] << " - " <<  i <<" \t" << get_weight(parent[i], i) << std::endl;
+                    if(i != (unsigned int)parent[i])
+                        std::cout<< parent[i] << " - " <<  i <<" \t" << get_weight(parent[i], i) << std::endl;
             }
         }
         default:
@@ -145,30 +190,35 @@ bool Graph::scc_visit(int v, int visited[], Graph &T, enum general_option option
 
 bool Graph::strongly_connected_components(enum general_option option)
 {
-    //Kosaraju's Algorithm
-    dfs(dfs_scc);
+    try{
+        //Kosaraju's Algorithm
+        dfs(dfs_scc);
 
-    Graph T = this->get_transpose();
+        Graph T = this->get_transpose();
 
-    //Mark all vertices as white (not visited)
-    int visited[this->V] = {};
+        //Mark all vertices as white (not visited)
+        int visited[this->V] = {};
 
-    bool print = false;
-    switch(option){
-        case g_print:
-            print = true;
-            std::cout<<"Strongly Connected Components"<<std::endl;
-        break;
-        default:
-        break;
-    }
-    while(not this->scc_stack.empty()){
+        bool print = false;
+        switch(option){
+            case g_print:
+                print = true;
+                std::cout<<"Strongly Connected Components"<<std::endl;
+            break;
+            default:
+            break;
+        }
+        while(not this->scc_stack.empty()){
+            if(print) std::cout<<std::endl;
+            int current = this->scc_stack.top();
+            this->scc_stack.pop();
+            scc_visit(current, visited, T, option);
+        }
         if(print) std::cout<<std::endl;
-        int current = this->scc_stack.top();
-        this->scc_stack.pop();
-        scc_visit(current, visited, T, option);
+    }catch(std::exception &e){
+        std::cout<<"Strongly Connected Components Error"<<std::endl;
     }
-    if(print) std::cout<<std::endl;
+
     return true;
 }
 

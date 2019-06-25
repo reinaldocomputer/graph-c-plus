@@ -27,9 +27,9 @@ Edge 	 Weight
 Minimum Spanning Tree
 Kruskal Algorithm
 Edge 	 Weight
-0 - 0 	-1
 0 - 1 	1
 1 - 2 	1
+Topological Sort Error: Cyclic Graph
 Processing:tests/cyclic_graph.txt
 Vertice 0 Edges
 [DEST]: 1[WEIGHT]: 2
@@ -61,7 +61,7 @@ Kruskal Algorithm
 Edge 	 Weight
 2 - 0 	1
 0 - 1 	2
-2 - 2 	-1
+Topological Sort Error: Cyclic Graph
 Processing:tests/example1.txt
 Vertice 0 Edges
 [DEST]: 1[WEIGHT]: 1
@@ -111,12 +111,12 @@ Edge 	 Weight
 Minimum Spanning Tree
 Kruskal Algorithm
 Edge 	 Weight
-0 - 0 	-1
 0 - 1 	1
 0 - 2 	1
 1 - 3 	1
 1 - 4 	1
 3 - 5 	1
+Topological Sort Error: Cyclic Graph
 Processing:tests/geek_graph.txt
 Vertice 0 Edges
 Vertice 1 Edges
@@ -163,72 +163,83 @@ Edge 	 Weight
 4 - 1 	1
 5 - 2 	1
 2 - 3 	1
-4 - 4 	-1
-5 - 5 	-1
+Vetex 	 Distance from the source
+0 	0
+1 	2147483647
+2 	2147483647
+3 	2147483647
+4 	2147483647
+5 	2147483647
 Processing:tests/minimum_tree.txt
 Vertice 0 Edges
 [DEST]: 1[WEIGHT]: 4
 [DEST]: 7[WEIGHT]: 8
 Vertice 1 Edges
+[DEST]: 0[WEIGHT]: 4
 [DEST]: 2[WEIGHT]: 8
 [DEST]: 7[WEIGHT]: 11
 Vertice 2 Edges
+[DEST]: 1[WEIGHT]: 8
 [DEST]: 3[WEIGHT]: 7
-[DEST]: 8[WEIGHT]: 2
 [DEST]: 5[WEIGHT]: 4
+[DEST]: 8[WEIGHT]: 1
 Vertice 3 Edges
+[DEST]: 2[WEIGHT]: 7
 [DEST]: 4[WEIGHT]: 9
 [DEST]: 5[WEIGHT]: 14
 Vertice 4 Edges
+[DEST]: 3[WEIGHT]: 9
 [DEST]: 5[WEIGHT]: 10
 Vertice 5 Edges
+[DEST]: 2[WEIGHT]: 4
+[DEST]: 3[WEIGHT]: 13
+[DEST]: 4[WEIGHT]: 10
 [DEST]: 6[WEIGHT]: 2
-Vertice 6 Edges
 [DEST]: 7[WEIGHT]: 1
 [DEST]: 8[WEIGHT]: 6
+Vertice 6 Edges
+[DEST]: 5[WEIGHT]: 2
 Vertice 7 Edges
+[DEST]: 0[WEIGHT]: 8
+[DEST]: 1[WEIGHT]: 11
+[DEST]: 6[WEIGHT]: 1
 [DEST]: 8[WEIGHT]: 7
 Vertice 8 Edges
+[DEST]: 2[WEIGHT]: 2
+[DEST]: 6[WEIGHT]: 6
+[DEST]: 7[WEIGHT]: 7
 Degree of Vertices
-0: 0
-1: 1
-2: 1
-3: 1
-4: 1
-5: 3
-6: 1
-7: 3
+0: 2
+1: 3
+2: 4
+3: 3
+4: 2
+5: 4
+6: 3
+7: 4
 8: 3
 [0]
 [1]
 [7]
 [2]
+[6]
 [8]
 [3]
 [5]
 [4]
-[6]
-Topological Sort
-[0]
-[1]
-[2]
-[3]
-[4]
-[5]
-[6]
-[7]
-[8]
+Cycle Detected
+Topological Sort Error: Cyclic Graph
 Strongly Connected Components
 
-[0] 
-[1] 
-[2] 
-[3] 
-[4] 
-[5] 
-[6] 
-[7] 
-[8] 
+[0] [1] [2] [3] [4] [5] [6] [7] [8] 
+
+
+
+
+
+
+
+
 Minimum Spanning Tree
 Prim Algorithm
 Edge 	 Weight
@@ -237,21 +248,21 @@ Edge 	 Weight
 2 - 3 	7
 3 - 4 	9
 2 - 5 	4
-5 - 6 	2
-6 - 7 	1
-2 - 8 	2
+7 - 6 	1
+5 - 7 	1
+2 - 8 	1
 Minimum Spanning Tree
 Kruskal Algorithm
 Edge 	 Weight
-0 - 0 	-1
+7 - 0 	8
 0 - 1 	4
-1 - 2 	8
-2 - 3 	7
-3 - 4 	9
+3 - 2 	7
+4 - 3 	9
 2 - 5 	4
-5 - 6 	2
-0 - 7 	8
-2 - 8 	2
+7 - 6 	1
+5 - 7 	1
+2 - 8 	1
+Topological Sort Error: Cyclic Graph
 Processing:tests/no_ciclyc_graph.txt
 Vertice 0 Edges
 [DEST]: 1[WEIGHT]: 2
@@ -282,9 +293,76 @@ Edge 	 Weight
 Minimum Spanning Tree
 Kruskal Algorithm
 Edge 	 Weight
-0 - 0 	-1
 0 - 1 	2
 1 - 2 	2
+Vetex 	 Distance from the source
+0 	0
+1 	2
+2 	4
+Processing:tests/prim.txt
+Vertice 0 Edges
+[DEST]: 1[WEIGHT]: 2
+[DEST]: 3[WEIGHT]: 6
+Vertice 1 Edges
+[DEST]: 0[WEIGHT]: 2
+[DEST]: 2[WEIGHT]: 3
+[DEST]: 3[WEIGHT]: 8
+[DEST]: 4[WEIGHT]: 5
+Vertice 2 Edges
+[DEST]: 1[WEIGHT]: 3
+[DEST]: 4[WEIGHT]: 7
+Vertice 3 Edges
+[DEST]: 0[WEIGHT]: 6
+[DEST]: 1[WEIGHT]: 7
+[DEST]: 4[WEIGHT]: 9
+Vertice 4 Edges
+[DEST]: 1[WEIGHT]: 5
+[DEST]: 2[WEIGHT]: 7
+[DEST]: 3[WEIGHT]: 9
+Vertice 5 Edges
+Vertice 6 Edges
+Vertice 7 Edges
+Degree of Vertices
+0: 2
+1: 4
+2: 2
+3: 3
+4: 3
+5: 0
+6: 0
+7: 0
+[0]
+[1]
+[3]
+[2]
+[4]
+Cycle Detected
+Topological Sort Error: Cyclic Graph
+Strongly Connected Components
+
+[7] 
+[6] 
+[5] 
+[0] [1] [2] [4] [3] 
+
+
+
+
+Minimum Spanning Tree
+Prim Algorithm
+Edge 	 Weight
+0 - 1 	2
+1 - 2 	3
+0 - 3 	6
+1 - 4 	5
+Minimum Spanning Tree
+Kruskal Algorithm
+Edge 	 Weight
+0 - 1 	2
+1 - 2 	3
+0 - 3 	6
+1 - 4 	5
+Topological Sort Error: Cyclic Graph
 Processing:tests/wiki_graph.txt
 Vertice 0 Edges
 [DEST]: 7[WEIGHT]: 1
@@ -346,7 +424,6 @@ Edge 	 Weight
 Minimum Spanning Tree
 Kruskal Algorithm
 Edge 	 Weight
-0 - 0 	-1
 0 - 1 	1
 1 - 2 	1
 2 - 3 	1
@@ -354,3 +431,4 @@ Edge 	 Weight
 4 - 5 	1
 5 - 6 	1
 0 - 7 	1
+Topological Sort Error: Cyclic Graph

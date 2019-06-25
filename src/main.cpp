@@ -6,6 +6,7 @@
 enum operation{
     op_none = 0,
     op_test = 1,
+    op_undirected,
 };
 /*
     Menu option
@@ -33,6 +34,7 @@ void processing(char *file_name, enum operation op)
             fscanf(pFile, " %d", &weight);
             
             mygraph.add_edge(ori, dest, weight);
+            if(op == op_undirected) mygraph.add_edge(dest, ori, weight);
         }
         switch(op){
             case op_test:
@@ -44,9 +46,12 @@ void processing(char *file_name, enum operation op)
                 mygraph.strongly_connected_components(Graph::g_print);
                 mygraph.minimum_spanning_tree(Graph::mst_prim, Graph::g_print);
                 mygraph.minimum_spanning_tree(Graph::mst_kruskal, Graph::g_print);
+                mygraph.dag_sortest_paths(0, Graph::g_print);
              break;
+             case op_undirected:
              case op_none:
              default:
+                mygraph.minimum_spanning_tree(Graph::mst_prim, Graph::g_print);
              break;
         }
     }
@@ -55,18 +60,27 @@ void processing(char *file_name, enum operation op)
 
 int main(int argc, char *argv[])
 {
+    //Input
     if(strcmp(argv[1],"-i") == 0){
         for (int i = 2; i < argc; i++)
         {
             processing(argv[i], op_none);
         }        
     }
+    //Input file and run tests
     else if(strcmp(argv[1],"-it") == 0){
         for (int i = 2; i < argc; i++)
         {
             processing(argv[i], op_test);
         }        
-    }    
+    }  
+    // Undirected Graph as Iput 
+    else if(strcmp(argv[1],"-ui") == 0){
+        for (int i = 2; i < argc; i++)
+        {
+            processing(argv[i], op_undirected);
+        }        
+    }
     else if(strcmp(argv[1],"-h") == 0){
         std::cout << "-i | Input File" << std::endl;
         std::cout << "-it | Input File and Test" << std::endl;
